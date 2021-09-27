@@ -1,5 +1,5 @@
 {% set name = "afar" %}
-{% set version = "0.5.2" %}
+{% set version = "0.6.0" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/afar-{{ version }}.tar.gz
-  sha256: 7ba33154a01e0434c52da42aa5fb4e74e3a9a3855a5c25c465dfd4d0b5336f2a
+  sha256: 15cd511e949fb74ac05e0c8ffe87268fc7c25c8467711c8450e231c4dad493ff
 
 build:
   number: 0
@@ -20,7 +20,7 @@ requirements:
     - pip
     - python >=3.7
   run:
-    - distributed
+    - distributed >=2021.9.1
     - innerscope
     - python >=3.7
 
