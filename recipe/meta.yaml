@@ -1,5 +1,5 @@
 {% set name = "afar" %}
-{% set version = "0.6.0" %}
+{% set version = "0.6.1" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/afar-{{ version }}.tar.gz
-  sha256: 15cd511e949fb74ac05e0c8ffe87268fc7c25c8467711c8450e231c4dad493ff
+  sha256: 24a324adb54e6ebb74c7c9b5a7c8b126eed3492517a7079c0ce0b7feafa8b014
 
 build:
   number: 0
