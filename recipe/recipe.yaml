@@ -1,0 +1,66 @@
+schema_version: 1
+
+context:
+  version: "0.7.0"
+
+package:
+  name: afar
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/a/afar/afar-${{ version }}.tar.gz
+  sha256: edc4fbe9b8a5f55187dd0eb6c4c756561949473cb2b8459c0e4ea8b21d778c42
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=77
+    - setuptools-git-versioning
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - distributed >=2026.1.1
+    - innerscope >=0.8.0
+
+tests:
+  - python:
+      imports:
+        - afar
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  # afar reads the caller's source and frames, which change with every Python, so run the
+  # suite (a local Dask cluster) on both the oldest and the newest Python.
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pytest >=9.0.3
+        - ipython >=8.10
+    script:
+      - pytest -v --pyargs afar
+  - requirements:
+      run:
+        - python
+        - pytest >=9.0.3
+        - ipython >=8.10
+    script:
+      - pytest -v --pyargs afar
+
+about:
+  homepage: https://github.com/eriknw/afar
+  repository: https://github.com/eriknw/afar
+  summary: Run code on a Dask cluster via a context manager or IPython magic
+  description: |
+    afar allows you to run code on a remote Dask cluster using context managers and IPython magics.
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - eriknw
